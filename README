@@ -1,0 +1,7 @@
+
+---
+# .venv에 라이브러리 추가 시, 명령어 수행
+uv pip freeze > requirements.txt
+
+# 프로젝트 환경 설치 시 명령어 수행
+uv pip install -r requirements.txt
