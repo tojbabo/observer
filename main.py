@@ -1,6 +1,9 @@
+import common.logger as logger
 from observ_windows.obs_window import job, readunsaveddata
 import asyncio
 from sender.sender import sendjob, send2server
+
+VERSION = '0.0.1'
 
 count = 0
 
@@ -22,7 +25,9 @@ async def sch():
 
 
 if __name__ == "__main__":
-    print('good')   
+    logger.info('windows observer start')
     readunsaveddata()
     send2server()
-    # asyncio.run(sch())
+    asyncio.run(sch())
+    
+    
