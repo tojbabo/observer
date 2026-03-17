@@ -1,18 +1,17 @@
 from observ_windows.obs_window import getlist, clearunsaveddata
 import requests
+import common.logger as logger
 
 async def sendjob():
     # 60분마다 모인 데이터를 서버로 전송하는 역할
     send2server()
 
 def send2server():
-    print('send to server')
+    logger.info(f'send2server()')
     lines = getlist()
 
     # 보낼 데이터가 없으면 바로 종료
-    if not lines:
-        print('no data to send')
-        return False
+    if not lines: return False
 
     url = "http://localhost:3000/api/windows/set"  # 필요하면 엔드포인트를 바꿔 사용하세요.
 
@@ -25,11 +24,11 @@ def send2server():
     try:
         response = requests.post(url, json=payload, timeout=5)
         response.raise_for_status()
-        print(f"sent: {len(lines)} -> status {response.status_code}")
+        logger.info(f'sent: {len(lines)} -> status {response.status_code}')
 
         # 서버가 정상 응답했으므로, unsaved 데이터(.tempfile + 메모리)를 모두 제거
         clearunsaveddata()
         return True
     except requests.RequestException as e:
-        print(f"failed to send {len(lines)}: {e}")
+        logger.error(f'failed to send {len(lines)}: {e}')
         return False

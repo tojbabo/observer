@@ -69,13 +69,12 @@ def readunsaveddata():
 def writedata(data):
     now = datetime.datetime.now()
     DATALIST.append([now.strftime("#%Y%m%d%H%M"),data])
+    
     with open(FILENAME, "a", encoding="utf-8") as f:
-        
         f.write(now.strftime("#%Y%m%d%H%M\n"))
+        for row in data: f.write(f"{row}\n")
 
-        for row in data:
-            f.write(f"{row}\n")
-    print('save data')
+    logger.info(f'save data - {len(data)}')
 
 def getlist():
     return DATALIST

@@ -1,7 +1,7 @@
+<div>
+개인 PC의 정보를 관찰(observe)해서 서버로 전송하는 프로그램
+1. cpu를 점유하고 있는 프로세스 목록을 5분단위로 수집
+2. 30분 단위로 서버로 전송
 
----
-# .venv에 라이브러리 추가 시, 명령어 수행
-uv pip freeze > requirements.txt
-
-# 프로젝트 환경 설치 시 명령어 수행
-uv pip install -r requirements.txt
+</div>
+</hr>

@@ -3,7 +3,7 @@ from observ_windows.obs_window import job, readunsaveddata
 import asyncio
 from sender.sender import sendjob, send2server
 
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 
 count = 0
 
@@ -11,16 +11,14 @@ async def sch():
     global count
     
     while True:
-        await asyncio.sleep(60*10)
+        await asyncio.sleep(60*5)
         count += 1
 
-        if count == 6: 
+        if count == 5: 
             count = 0
             asyncio.create_task(sendjob())
 
-
         asyncio.create_task(job())
-        print('do job')
     
 
 
