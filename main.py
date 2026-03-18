@@ -1,11 +1,16 @@
+import os
+import sys
+import asyncio
+
 import common.logger as logger
 from observ_windows.obs_window import job, readunsaveddata
-import asyncio
 from sender.sender import sendjob, send2server
 
-VERSION = '0.0.2'
+VERSION = '0.0.3'
 
 count = 0
+
+LOCK_FILE = ".lock"
 
 async def sch():
     global count
@@ -23,9 +28,20 @@ async def sch():
 
 
 if __name__ == "__main__":
-    logger.info('windows observer start')
-    readunsaveddata()
-    send2server()
-    asyncio.run(sch())
+
+    if os.path.exists(LOCK_FILE):
+        logger.error('process already running')
+
+    else:
+
+        with open(LOCK_FILE, 'w') as f:
+            f.write(str(os.getpid()))
+        try:    
+            logger.info('windows observer start')
+            readunsaveddata()
+            send2server()
+            asyncio.run(sch())
+        finally:
+            os.remove(LOCK_FILE)
     
     
