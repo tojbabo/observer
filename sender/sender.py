@@ -25,7 +25,7 @@ def send2server():
         lines = lines[length:]
 
         payload = {
-            "id": "identify",          # 클라이언트를 구분할 식별자(필요 시 변경)
+            "id": 0,         # 클라이언트를 구분할 식별자(필요 시 변경)
             "count": len(data),       # data 리스트의 길이
             "data": list(data),       # 실제 데이터 리스트
         }
